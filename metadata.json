@@ -1,0 +1,5 @@
+{
+  "name": "Báo Cáo Giám Sát Thi",
+  "description": "Ứng dụng báo cáo nhanh tình hình giám sát thi, hỗ trợ tổng hợp thông tin cán bộ, sự cố và vi phạm nhanh chóng.",
+  "requestFramePermissions": []
+}
