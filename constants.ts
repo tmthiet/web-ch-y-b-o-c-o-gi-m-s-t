@@ -1,6 +1,21 @@
 
 import { ShiftTime, AreaType, AreaOption } from './types';
 
+// --- CẤU HÌNH MẶC ĐỊNH TOÀN HỆ THỐNG ---
+// Điền thông tin vào đây để áp dụng cho TẤT CẢ thiết bị khi mở Web
+export const APP_CONFIG = {
+  // 1. Link Web App cho chức năng GỬI BÁO CÁO (File Lịch sử)
+  // Copy link kết thúc bằng /exec dán vào giữa dấu ngoặc kép bên dưới
+  DEFAULT_REPORT_URL: "", 
+
+  // 2. Link Web App cho chức năng NGUỒN DỮ LIỆU (File Lịch thi/Danh sách)
+  // Copy link kết thúc bằng /exec dán vào giữa dấu ngoặc kép bên dưới
+  DEFAULT_SCHEDULE_URL: "",
+
+  // 3. Mật khẩu Admin mặc định (Nếu muốn thay đổi cố định)
+  DEFAULT_ADMIN_PASSWORD: "123@123@123@"
+};
+
 export const SHIFTS: ShiftTime[] = [
   ShiftTime.S730,
   ShiftTime.S930,

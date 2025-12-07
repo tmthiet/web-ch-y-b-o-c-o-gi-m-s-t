@@ -1,7 +1,7 @@
 
 import React, { useState, useRef, useMemo, useEffect } from 'react';
 import { AreaOption, ReportData, ScheduleItem, Staff, SavedReport } from './types';
-import { SHIFTS, AREAS, INITIAL_REPORT_DATA, SUGGESTED_SUPERVISORS, SUGGESTED_SUBJECTS, SUGGESTED_ROOMS, AREA_KEYWORDS } from './constants';
+import { SHIFTS, AREAS, INITIAL_REPORT_DATA, SUGGESTED_SUPERVISORS, SUGGESTED_SUBJECTS, SUGGESTED_ROOMS, AREA_KEYWORDS, APP_CONFIG } from './constants';
 import { FormField } from './components/FormField';
 import { IncidentInput } from './components/IncidentInput';
 import { IncidentWithSelector } from './components/IncidentWithSelector';
@@ -94,15 +94,16 @@ function App() {
   const [isReferenceModalOpen, setIsReferenceModalOpen] = useState(false);
   
   // SECURITY CONFIGURATION
-  // Default password set to 123@123@123@
-  const [adminPassword, setAdminPassword] = usePersistedState<string>('admin_password', '123@123@123@');
+  // UPDATED: Use APP_CONFIG.DEFAULT_ADMIN_PASSWORD as fallback default
+  const [adminPassword, setAdminPassword] = usePersistedState<string>('admin_password', APP_CONFIG.DEFAULT_ADMIN_PASSWORD);
   const [adminEmails, setAdminEmails] = usePersistedState<string[]>('admin_allowed_emails', []);
   
   // --- SPLIT GOOGLE SHEET CONFIGURATION ---
+  // UPDATED: Use APP_CONFIG for defaults if localStorage is empty
   // 1. Report URL (For POSTing reports - Lịch sử báo cáo)
-  const [reportWebhookUrl, setReportWebhookUrl] = usePersistedState<string>('google_sheet_url', ''); // Maintain key for backward compatibility
+  const [reportWebhookUrl, setReportWebhookUrl] = usePersistedState<string>('google_sheet_url', APP_CONFIG.DEFAULT_REPORT_URL);
   // 2. Schedule/Data URL (For GETting data - Lịch giám sát / Danh sách)
-  const [scheduleSourceUrl, setScheduleSourceUrl] = usePersistedState<string>('schedule_source_url', '');
+  const [scheduleSourceUrl, setScheduleSourceUrl] = usePersistedState<string>('schedule_source_url', APP_CONFIG.DEFAULT_SCHEDULE_URL);
 
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -822,8 +823,8 @@ function App() {
             </FormField>
           </div>
           
-          {/* STATIC SAVE BUTTON AREA */}
-          <div className="bg-gray-50 border-t border-gray-200 p-4">
+          {/* STATIC SAVE BUTTON AREA - UPDATED TO STICKY */}
+          <div className="sticky bottom-0 z-30 bg-gray-50 border-t border-gray-200 p-4 shadow-inner">
              <button
               onClick={handleSaveReport}
               className="flex items-center justify-center w-full px-6 py-3.5 bg-green-600 text-white font-bold text-base uppercase tracking-wide rounded-lg shadow-lg hover:bg-green-700 hover:shadow-xl focus:outline-none active:scale-95 transition-all transform hover:-translate-y-0.5"
